@@ -1,0 +1,15 @@
+body {
+    background: red;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 200px auto;
+}
+
+header {
+    display: grid;
+    max-width: 800px;
+    margin: 0 auto;
+    grid-template-columns: auto 200px 50px;
+}
