@@ -33,6 +33,11 @@ def all_ingredients
   run_sql('SELECT * FROM ingredients;')
 end
 
+def find_ingredient_id_by_name(name)
+  ingredients = run_sql('SELECT * FROM ingredients WHERE name = $1', [name])
+  return ingredients[0]["id"]
+end
+
 ####################### RECIPE #####################
 def add_recipe(rec_hash)
   recipe_id = run_sql('INSERT INTO recipes(user_id, name, category, keywords, servings, preperation_time, recipe_steps, rating_stars, rating_votes, image_url) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;', [
@@ -61,12 +66,38 @@ def all_recipes(category = 'All', limit = 'NULL', skip = 0)
   end
 end
 
+def find_recipe_by_id(id)
+  recipe = run_sql("SELECT * FROM recipes WHERE id = $1;", [id])
+  return recipe[0]
+end
+
+def update_recipe(rec_hash, rec_id)
+  recipe = run_sql('UPDATE recipes SET name = $1, category = $2, keywords = $3, servings = $4, preperation_time =$5, recipe_steps = $6, rating_stars = $7, rating_votes = $8, image_url = $9 WHERE id = $10;', [
+    rec_hash[:name],
+    rec_hash[:category],
+    rec_hash[:keywords],
+    rec_hash[:servings],
+    rec_hash[:preperation_time],
+    rec_hash[:recipe_steps],
+    rec_hash[:rating_stars],
+    rec_hash[:rating_votes],
+    rec_hash[:image_url], 
+    rec_id
+  ])
+
+  run_sql('DELETE FROM recipe_ingredients WHERE recipe_id = $1;', [rec_id])
+  rec_hash[:ingredients].each do |ingredient|
+    run_sql("INSERT INTO recipe_ingredients(recipe_id, quantity, ingredient_id) VALUES ('#{rec_id}', '#{ingredient[:quantity]}', '#{ingredient[:ingredient_id]}');")
+  end
+end
+
 ####################### USER_RECIPES #####################
 def add_recipe_to_user_list(user_id, recipe_id, rating = 4)
   run_sql('INSERT INTO user_recipes (user_id, recipe_id, rating) VALUES ($1, $2, $3);', [user_id, recipe_id, rating])
 end
 
-def find_user_recipe_list(user_id, category = 'All', limit = 'NULL', skip = 0)
+def find_user_recipe_list(category = 'All', limit = 'NULL', skip = 0)
+  user_id = session[:user_id]
   recipe_list = []
   if category == 'All'
     recipe_ids = run_sql("SELECT * FROM user_recipes WHERE user_id = $1 LIMIT #{limit} OFFSET #{skip};", [user_id])
@@ -77,10 +108,14 @@ def find_user_recipe_list(user_id, category = 'All', limit = 'NULL', skip = 0)
   else
     recipe_ids = run_sql("SELECT * FROM user_recipes WHERE user_id = $1 LIMIT #{limit} OFFSET #{skip};", [user_id])
     recipe_ids.each do |recipe_id|
-      recipe = run_sql('SELECT * FROM recipes WHERE (id = $1 AND category = $2);', [recipe_id['recipe_id'], category])
+      recipe = run_sql("SELECT * FROM recipes WHERE (id = $1 AND category = $2);", [recipe_id['recipe_id'], category])
       recipe_list.push(recipe[0]) unless recipe.count == 0
     end
   end
-
   recipe_list
+end
+
+def delete_recipe_from_user_list(user_id, recipe_id)
+  user_recipe = run_sql("SELECT * FROM user_recipes WHERE (user_id = $1 AND recipe_id = $2) LIMIT 1;", [user_id, recipe_id])
+  run_sql('DELETE FROM user_recipes WHERE id = $1;', [user_recipe[0]['id']])
 end

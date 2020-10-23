@@ -11,7 +11,7 @@ header {
     display: grid;
     max-width: 800px;
     margin: 0 auto;
-    grid-template-columns: auto 50px 80px 150px 50px;
+    grid-template-columns: auto 50px 80px 80px 150px 50px;
 }
 
 article {

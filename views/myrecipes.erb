@@ -11,14 +11,14 @@
     </div>
     <div>
         <div>
-            <p> <%= all_recipes(category).count%> Recipes Page: 
-                <% 1.upto number_of_pages(all_recipes(category).count, 5)  do |n|  %>
-                    <a href="/?page_num=<%= n%>&category=<%= category %>"><%= n%></a>
+            <p> <%= find_user_recipe_list(category).count%> Recipes Page: 
+                <% 1.upto number_of_pages(find_user_recipe_list(category).count, 5)  do |n|  %>
+                    <a href="/myrecipes?page_num=<%= n%>&category=<%= category %>"><%= n%></a>
                 <% end %>
             </p>
         </div>
         <section>
-            <% all_recipes(category, recipes_pp, recipes_pp*(page_num.to_i - 1) ).each do |_recipe| %>
+            <% find_user_recipe_list(category, recipes_pp, recipes_pp*(page_num.to_i - 1) ).each do |_recipe| %>
                 <article>
                     <h3><%= _recipe["name"]%></h3>
                     <h4>Recipe Category</h4>
@@ -26,6 +26,13 @@
                         suscipit officia ratione. Fugit molestias fugiat doloremque est ducimus modi cupiditate, laboriosam aut enim ea recusandae aliquam officiis consectetur at temporibus sequi ipsam, harum quia!
                     </p>
                     <p>Keywords</p>
+                    <form action="/userrecipe?recipe_id=<%= _recipe["id"] %>" method="post">
+                    <input type="hidden" name="_method" value ="delete">
+                        <button>Delete</button>
+                    </form>
+                    <form action="/userrecipe/edit/?recipe_id=<%= _recipe["id"] %>" method="post">
+                        <button>Edit</button>
+                    </form>
                 </article>
             <% end %>
         </section>
