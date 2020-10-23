@@ -9,13 +9,18 @@
 <body>
   <header>
     <h1>What should I eat?</h1>
+    <a href="/">Home</a>
+
     <% if logged_in? %>
+      <a href="/myrecipes">My Recipes</a>
       <%= find_user_by_id(session[:user_id])["email"]  %>
       <a href="/logout">Logout</a>
     <% else %>
       <a href="/login">Login</a>
     <% end %>
   </header>
+
+
 
   <%= yield %>
 

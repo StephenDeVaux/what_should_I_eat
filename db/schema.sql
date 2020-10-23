@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS recipes;
 DROP TABLE IF EXISTS users; 
 DROP TABLE IF EXISTS ingredients; 
 DROP TABLE IF EXISTS recipe_ingredients; 
+DROP TABLE IF EXISTS user_recipes; 
 
 CREATE TABLE recipes ( 
     id SERIAL PRIMARY KEY,
@@ -24,8 +25,7 @@ CREATE TABLE recipes (
 CREATE TABLE users (
     id SERIAL PRIMARY KEY, 
     email varCHAR(200),
-    password_hash TEXT,
-    recipe_list INTEGER [][]
+    password_hash TEXT
 );
 
 CREATE TABLE ingredients( 
@@ -40,4 +40,11 @@ CREATE TABLE recipe_ingredients (
     recipe_id INTEGER, 
     quantity INTEGER, 
     ingredient_id INTEGER
-)
+);
+
+CREATE TABLE user_recipes ( 
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER, 
+    recipe_id INTEGER, 
+    rating INTEGER
+);
