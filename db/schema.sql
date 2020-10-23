@@ -16,7 +16,7 @@ CREATE TABLE recipes (
     keywords varCHAR(200) [], 
     servings INTEGER, 
     preperation_time INTEGER, 
-    recipe_steps TEXT [], 
+    recipe_steps TEXT, 
     rating_stars INTEGER,
     rating_votes INTEGER,
     image_url TEXT

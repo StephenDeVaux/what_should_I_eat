@@ -13,16 +13,7 @@
                 <option value="<%= category%>">   
             <% end %>
         </datalist> 
-    </div>  
-    <div>
-        <label for="">Keywords</label>
-        <input list="keywordslist1" name="keywords">
-        <datalist id="keywordslist1">
-            <% get_keywords.each do |keyword|%>
-                <option value="<%= keyword%>">   
-            <% end %>
-        </datalist>     
-    </div>
+    </div>   
     <div>
         <label for="">Servings(People)</label>
         <input type="number" name="servings">
@@ -31,46 +22,9 @@
         <label for="">Preperaton Time(min)</label>
         <input type="number" name="preperation_time">
     </div>
+    <div>
         <label for="">Recipe Steps</label>
-    <div>
-        <label for="">1</label>
-        <input type="text" name="step1">
-    </div>
-    <div>
-        <label for="">2</label>
-        <input type="text" name="step2">
-    </div>
-    <div>
-        <label for="">3</label>
-        <input type="text" name="step3">
-    </div>
-    <div>
-        <label for="">4</label>
-        <input type="text" name="step4">
-    </div>
-    <div>
-        <label for="">5</label>
-        <input type="text" name="step5">
-    </div>
-    <div>
-        <label for="">6</label>
-        <input type="text" name="step7">
-    </div>
-    <div>
-        <label for="">7</label>
-        <input type="text" name="step7">
-    </div>
-    <div>
-        <label for="">8</label>
-        <input type="text" name="step8">
-    </div>
-    <div>
-        <label for="">9</label>
-        <input type="text" name="step9">
-    </div>
-    <div>
-        <label for="">10</label>
-        <input type="text" name="step10">
+        <input type="text" name="recipe_steps">
     </div>
     <div>
         <label for="">Image URL</label>

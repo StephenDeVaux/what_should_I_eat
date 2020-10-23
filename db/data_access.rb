@@ -38,13 +38,17 @@ def find_ingredient_id_by_name(name)
   return ingredients[0]["id"]
 end
 
+def find_ingredient_name_by_id(id)
+  ingredients = run_sql('SELECT * FROM ingredients WHERE id = $1', [id])
+  return ingredients[0]["name"]
+end
+
 ####################### RECIPE #####################
 def add_recipe(rec_hash)
-  recipe_id = run_sql('INSERT INTO recipes(user_id, name, category, keywords, servings, preperation_time, recipe_steps, rating_stars, rating_votes, image_url) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;', [
+  recipe_id = run_sql('INSERT INTO recipes(user_id, name, category, servings, preperation_time, recipe_steps, rating_stars, rating_votes, image_url) values($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id;', [
                         rec_hash[:user_id],
                         rec_hash[:name],
                         rec_hash[:category],
-                        rec_hash[:keywords],
                         rec_hash[:servings],
                         rec_hash[:preperation_time],
                         rec_hash[:recipe_steps],
@@ -72,10 +76,9 @@ def find_recipe_by_id(id)
 end
 
 def update_recipe(rec_hash, rec_id)
-  recipe = run_sql('UPDATE recipes SET name = $1, category = $2, keywords = $3, servings = $4, preperation_time =$5, recipe_steps = $6, rating_stars = $7, rating_votes = $8, image_url = $9 WHERE id = $10;', [
+  recipe = run_sql('UPDATE recipes SET name = $1, category = $2, servings = $3, preperation_time =$4, recipe_steps = $5, rating_stars = $6, rating_votes = $7, image_url = $8 WHERE id = $9;', [
     rec_hash[:name],
     rec_hash[:category],
-    rec_hash[:keywords],
     rec_hash[:servings],
     rec_hash[:preperation_time],
     rec_hash[:recipe_steps],
@@ -119,3 +122,9 @@ def delete_recipe_from_user_list(user_id, recipe_id)
   user_recipe = run_sql("SELECT * FROM user_recipes WHERE (user_id = $1 AND recipe_id = $2) LIMIT 1;", [user_id, recipe_id])
   run_sql('DELETE FROM user_recipes WHERE id = $1;', [user_recipe[0]['id']])
 end
+
+####################### RECIPES_INGREDIENTS #####################
+def find_ingredients_for_recipe(recipe_id)
+  run_sql("SELECT * FROM recipe_ingredients WHERE recipe_id = $1;", [recipe_id])
+end
+

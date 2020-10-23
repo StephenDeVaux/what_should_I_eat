@@ -15,16 +15,7 @@
                 <option value="<%= category%>">   
             <% end %>
         </datalist> 
-    </div>  
-    <div>
-        <label for="">Keywords</label>
-        <input list="keywordslist1" name="keywords" value="<%= recipe["keywords"]%>">
-        <datalist id="keywordslist1">
-            <% get_keywords.each do |keyword|%>
-                <option value="<%= keyword%>">   
-            <% end %>
-        </datalist>     
-    </div>
+    </div> 
     <div>
         <label for="">Servings(People)</label>
         <input type="number" name="servings" value="<%= recipe["servings"]%>">
@@ -33,63 +24,29 @@
         <label for="">Preperaton Time(min)</label>
         <input type="number" name="preperation_time" value="<%= recipe["preperation_time"]%>">
     </div>
-        <label for="">Recipe Steps</label>
     <div>
-        <label for="">1</label>
-        <input type="text" name="step1" value="<%= recipe["recipe_steps"]%>">
-    </div>
-    <div>
-        <label for="">2</label>
-        <input type="text" name="step2">
-    </div>
-    <div>
-        <label for="">3</label>
-        <input type="text" name="step3">
-    </div>
-    <div>
-        <label for="">4</label>
-        <input type="text" name="step4">
-    </div>
-    <div>
-        <label for="">5</label>
-        <input type="text" name="step5">
-    </div>
-    <div>
-        <label for="">6</label>
-        <input type="text" name="step7">
-    </div>
-    <div>
-        <label for="">7</label>
-        <input type="text" name="step7">
-    </div>
-    <div>
-        <label for="">8</label>
-        <input type="text" name="step8">
-    </div>
-    <div>
-        <label for="">9</label>
-        <input type="text" name="step9">
-    </div>
-    <div>
-        <label for="">10</label>
-        <input type="text" name="step10">
+        <label for="">Recipe steps</label>
+        <input type="text" name="recipe_steps" value="<%= recipe["recipe_steps"]%>">
     </div>
     <div>
         <label for="">Image URL</label>
         <input type="text" name="image_url">
     </div>
     <label for="">Ingredients:</label>
+
+    <% ingredients_list = find_ingredients_for_recipe(recipe_id) %>
+    <% num_ingr = ingredients_list.count%>
     <% 1.upto 20 do |n| %>
         <div>
             <label for=""><% n %></label>
-            <input list="ingredientslist" name="ingredient<%= n %>">
+            <input list="ingredientslist" name="ingredient<%= n %>" value="<%= find_ingredient_name_by_id(ingredients_list[n-1]["ingredient_id"]) unless n > num_ingr %>">
             <datalist id="ingredientslist">
                 <% all_ingredients.each do |ingredient|%>
                     <option value="<%= ingredient["name"]%>">   
                 <% end %>
             </datalist>     
             <label for=""> Quantity </label>
-            <input type="number" name="quantity<%= n %>">
+            <input type="number" name="quantity<%= n %>" value="<%= ingredients_list[n-1]["quantity"] unless n > num_ingr %>">
         </div>
     <% end %>
     <button>Update Recipe</button>

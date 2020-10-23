@@ -105,10 +105,9 @@ post '/recipe' do
     user_id: session[:user_id],
     name: params['name'],
     category: params['category'],
-    keywords: "{#{params['keywords']}}",
     servings: params['servings'],
     preperation_time: params['preperation_time'],
-    recipe_steps: "{'#{params['step1']}', '#{params['step2']}', '#{params['step3']}', '#{params['step4']}', '#{params['step5']}'}",
+    recipe_steps: params['recipe_steps'],
     rating_stars: 0,
     rating_votes: 0,
     image_url: params['image_url'],
@@ -137,10 +136,9 @@ patch '/recipe' do
     user_id: session[:user_id],
     name: params['name'],
     category: params['category'],
-    keywords: "{#{params['keywords']}}",
     servings: params['servings'],
     preperation_time: params['preperation_time'],
-    recipe_steps: "{'#{params['step1']}', '#{params['step2']}', '#{params['step3']}', '#{params['step4']}', '#{params['step5']}'}",
+    recipe_steps: params['recipe_steps'],
     rating_stars: 0,
     rating_votes: 0,
     image_url: params['image_url'],
@@ -148,5 +146,5 @@ patch '/recipe' do
   }
 
   update_recipe(recipe, params["recipe_id"])
-  redirect "/"
+  redirect "/myrecipes"
 end
