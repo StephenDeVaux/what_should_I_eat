@@ -8,7 +8,7 @@
     <div>
         <div>
             <p class="pager" > Page: 
-                <% 1.upto number_of_pages(all_recipes(category).count, 5)  do |n|  %>
+                <% 1.upto number_of_pages(all_recipes(category).count, recipes_pp)  do |n|  %>
                     <a class="pages" href="/?page_num=<%= n%>&category=<%= category %>"><%= n%></a>
                 <% end %>
                 ( <%= all_recipes(category).count%> recipes )
@@ -17,12 +17,11 @@
         <section>
             <% all_recipes(category, recipes_pp, recipes_pp*(page_num.to_i - 1) ).each do |_recipe| %>
                 <article>
-                    <h3><%= _recipe["name"]%></h3>
-                    <h5><%= _recipe["category"]%></h5>
-                    <form class="recipe_btn" action="/userrecipe?recipe_id=<%= _recipe["id"] %>" method="post">
+                    <a class="recipe_details_btn" href="recipe?recipe_id=<%= _recipe["id"] %>"><%= _recipe["name"]%></a>
+                    <img src="<%= _recipe["image_url"]%>" alt="">
+                    <form class="recipe_btn bottom_fix" action="/userrecipe?recipe_id=<%= _recipe["id"] %>" method="post">
                         <button>+ My list</button>
                     </form>
-                    <img src="<%= _recipe["image_url"]%>" alt="">
                 </article>
             <% end %>
         </section>

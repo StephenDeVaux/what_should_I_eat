@@ -1,12 +1,11 @@
-<h1>Your Shopping list</h1>
-<%= recipe_ids.split(",") %>
+<h2>Your Shopping list</h2>
 
 <% list = find_ingredients_for_list_of_recipes( recipe_ids.split(",") )%>
 
-
-<% list.each do |item|%>
-    <article>
-        <p> <%= find_ingredient_name_by_id( item["ingredient_id"] )%> - Quantity = <%= item["quantity"]%>  <%=units_by_id(item["ingredient_id"])%></p>
-    </article>
-
-<% end %>
+<article>
+    <% list.each do |item|%>
+        <div>
+            <p> <%= find_ingredient_name_by_id( item["ingredient_id"] )%> - Quantity = <%= item["quantity"]%>  <%=units_by_id(item["ingredient_id"])%></p>
+        </div>
+    <% end %>
+</article>

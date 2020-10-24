@@ -1,0 +1,30 @@
+<% recipe = find_recipe_by_id(recipe_id) %>
+<% ingredients_list = find_ingredients_for_recipe(recipe_id) %>
+
+
+<div class="recipe_details">
+    <div>
+        <h1><%= recipe["name"]%></h1>
+        <p class="recipe_info" >Feeds: <%= recipe["servings"]%> people</p>
+        <p class="recipe_info" >Takes: <%= recipe["preperation_time"]%> min to make</p>
+        <p class="recipe_info recipe_ingredient_head" >Ingredients:</p>
+
+        <ul>
+            <% ingredients_list.each do |ingredient|  %>
+                <li>
+                    <%= ingredient["quantity"] %>
+                    <%= units_by_id(ingredient["ingredient_id"]) %>
+                    <%= find_ingredient_name_by_id(ingredient["ingredient_id"]) %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+    <div>
+        <img src="<%= recipe["image_url"]%>" alt="">
+    </div>
+</div>
+
+<article>
+    <h3>How to make it?</h3>
+    <p><%= recipe["recipe_steps"]%></p>
+</article>

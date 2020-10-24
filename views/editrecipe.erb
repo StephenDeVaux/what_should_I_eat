@@ -1,53 +1,55 @@
-<h2>Add Recipe!</h2>
+<h2>Edit Recipe</h2>
 <% recipe = find_recipe_by_id(recipe_id) %>
-<form action="/recipe" method="post">
-<input type="hidden" name="_method" value="patch">
-<input type="hidden" name="recipe_id" value="<%= recipe_id%>">
-    <div>
-        <label for="">Name</label>
-        <input type="text" name="name" value="<%= recipe["name"]%>">
-    </div>
-    <div>
-        <label for="">Category</label>
-        <input list="categories" name="category" value="<%= recipe["category"]%>">
-        <datalist id="categories">
-            <% get_categories.each do |category|%>
-                <option value="<%= category%>">   
-            <% end %>
-        </datalist> 
-    </div> 
-    <div>
-        <label for="">Servings(People)</label>
-        <input type="number" name="servings" value="<%= recipe["servings"]%>">
-    </div>
-    <div>
-        <label for="">Preperaton Time(min)</label>
-        <input type="number" name="preperation_time" value="<%= recipe["preperation_time"]%>">
-    </div>
-    <div>
-        <label for="">Recipe steps</label>
-        <input type="text" name="recipe_steps" value="<%= recipe["recipe_steps"]%>">
-    </div>
-    <div>
-        <label for="">Image URL</label>
-        <input type="text" name="image_url" value="<%= recipe["image_url"]%>">
-    </div>
-    <label for="">Ingredients:</label>
-
-    <% ingredients_list = find_ingredients_for_recipe(recipe_id) %>
-    <% num_ingr = ingredients_list.count%>
-    <% 1.upto 20 do |n| %>
+<article class="add_block">
+    <form action="/recipe" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input type="hidden" name="recipe_id" value="<%= recipe_id%>">
         <div>
-            <label for=""><% n %></label>
-            <input list="ingredientslist" name="ingredient<%= n %>" value="<%= find_ingredient_name_by_id(ingredients_list[n-1]["ingredient_id"]) unless n > num_ingr %>">
-            <datalist id="ingredientslist">
-                <% all_ingredients.each do |ingredient|%>
-                    <option value="<%= ingredient["name"]%>">   
-                <% end %>
-            </datalist>     
-            <label for=""> Quantity </label>
-            <input type="number" name="quantity<%= n %>" value="<%= ingredients_list[n-1]["quantity"] unless n > num_ingr %>">
+            <label class="add_label" for="">Name</label>
+            <input type="text" name="name" value="<%= recipe["name"]%>">
         </div>
-    <% end %>
-    <button>Update Recipe</button>
-</form>
+        <div>
+            <label class="add_label" for="">Category</label>
+            <input list="categories" name="category" value="<%= recipe["category"]%>">
+            <datalist id="categories">
+                <% get_categories.each do |category|%>
+                    <option value="<%= category%>">   
+                <% end %>
+            </datalist> 
+        </div> 
+        <div>
+            <label class="add_label" for="">Servings(People)</label>
+            <input type="number" name="servings" value="<%= recipe["servings"]%>">
+        </div>
+        <div>
+            <label class="add_label" for="">Preperaton Time(min)</label>
+            <input type="number" name="preperation_time" value="<%= recipe["preperation_time"]%>">
+        </div>
+        <div>
+            <label class="add_label" for="">Recipe steps</label>
+            <input type="text" name="recipe_steps" value="<%= recipe["recipe_steps"]%>">
+        </div>
+        <div>
+            <label class="add_label" for="">Image URL</label>
+            <input type="text" name="image_url" value="<%= recipe["image_url"]%>">
+        </div>
+        <label for="">Ingredients:</label>
+
+        <% ingredients_list = find_ingredients_for_recipe(recipe_id) %>
+        <% num_ingr = ingredients_list.count%>
+        <% 1.upto 20 do |n| %>
+            <div>
+                <label for=""><% n %></label>
+                <input list="ingredientslist" name="ingredient<%= n %>" value="<%= find_ingredient_name_by_id(ingredients_list[n-1]["ingredient_id"]) unless n > num_ingr %>">
+                <datalist id="ingredientslist">
+                    <% all_ingredients.each do |ingredient|%>
+                        <option value="<%= ingredient["name"]%>">   
+                    <% end %>
+                </datalist>     
+                <label for=""> Quantity </label>
+                <input type="number" name="quantity<%= n %>" value="<%= ingredients_list[n-1]["quantity"] unless n > num_ingr %>">
+            </div>
+        <% end %>
+        <button>Update Recipe</button>
+    </form>
+</article>

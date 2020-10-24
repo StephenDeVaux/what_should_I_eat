@@ -1,48 +1,50 @@
-<h2>Add Recipe!</h2>
+<h2>Add a recipe to the database</h2>
 
-<form action="/recipe" method="post">
-    <div>
-        <label for="">Name</label>
-        <input type="text" name="name">
-    </div>
-    <div>
-        <label for="">Category</label>
-        <input list="categories" name="category">
-        <datalist id="categories">
-            <% get_categories.each do |category|%>
-                <option value="<%= category%>">   
-            <% end %>
-        </datalist> 
-    </div>   
-    <div>
-        <label for="">Servings(People)</label>
-        <input type="number" name="servings">
-    </div>
-    <div>
-        <label for="">Preperaton Time(min)</label>
-        <input type="number" name="preperation_time">
-    </div>
-    <div>
-        <label for="">Recipe Steps</label>
-        <input type="text" name="recipe_steps">
-    </div>
-    <div>
-        <label for="">Image URL</label>
-        <input type="text" name="image_url">
-    </div>
-    <label for="">Ingredients:</label>
-    <% 1.upto 20 do |n| %>
+<article class="add_block">
+    <form action="/recipe" method="post">
         <div>
-            <label for=""><% n %></label>
-            <input list="ingredientslist" name="ingredient<%= n %>">
-            <datalist id="ingredientslist">
-                <% all_ingredients.each do |ingredient|%>
-                    <option value="<%= ingredient["name"]%>">   
-                <% end %>
-            </datalist>     
-            <label for=""> Quantity </label>
-            <input type="number" name="quantity<%= n %>">
+            <label class="add_label" for="">Name</label>
+            <input type="text" name="name">
         </div>
-    <% end %>
-    <button>Add Recipe</button>
-</form>
+        <div>
+            <label class="add_label" for="">Category</label>
+            <input list="categories" name="category">
+            <datalist id="categories">
+                <% get_categories.each do |category|%>
+                    <option value="<%= category%>">   
+                <% end %>
+            </datalist> 
+        </div>   
+        <div>
+            <label class="add_label" for="">Servings(People)</label>
+            <input type="number" name="servings">
+        </div>
+        <div>
+            <label class="add_label" for="">Preperaton Time(min)</label>
+            <input type="number" name="preperation_time">
+        </div>
+        <div>
+            <label class="add_label" for="">Recipe Steps</label>
+            <input type="text" name="recipe_steps">
+        </div>
+        <div>
+            <label class="add_label" for="">Image URL</label>
+            <input type="text" name="image_url">
+        </div>
+        <label for="">Ingredients:</label>
+        <% 1.upto 20 do |n| %>
+            <div>
+                <label for=""><% n %></label>
+                <input list="ingredientslist" name="ingredient<%= n %>">
+                <datalist id="ingredientslist">
+                    <% all_ingredients.each do |ingredient|%>
+                        <option value="<%= ingredient["name"]%>">   
+                    <% end %>
+                </datalist>     
+                <label for=""> Quantity </label>
+                <input type="number" name="quantity<%= n %>">
+            </div>
+        <% end %>
+        <button>Add Recipe</button>
+    </form> 
+</article>

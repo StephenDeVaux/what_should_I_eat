@@ -1,14 +1,24 @@
 <h2>Feed me! </h2>
 
-<form action="/mealplanner" method="post">
-    <label for="">How many meals do you need?</label>
-    <input type="number" name="num_meals">
-    <label for="">What type of meals do you want?</label>
-      <input list="categories" name="category">
-        <datalist id="categories">
-            <% get_categories.each do |category|%>
-                <option value="<%= category%>">   
-            <% end %>
-        </datalist> 
-    <button>Find my meals</button>
-</form>
+<h3>Dont know what to eat? Let a computer decide for you! By selecting how many meals you want, and from what type of category you need them, sophisticated machine learning and AI will choose from your taylored list of recipes and provide you with dining delights as well as a shopping list!</h3>
+
+<article class="add_block">
+    <form action="/mealplanner" method="post">
+        <div>
+            <label class="planner_label" for="">How many meals do you need?</label>
+            <input type="number" name="num_meals">
+        </div>
+        <div>
+            <label class="planner_label" for="">What type of meals do you want?</label>
+            <input list="categories" name="category">
+            <datalist id="categories">
+                <% get_categories.each do |category|%>
+                    <option value="<%= category%>">   
+                <% end %>
+            </datalist> 
+        </div>
+        <div>
+            <button class="find_meal_btn" >FIND MY MEALS</button>
+        </div>
+    </form>
+</article>
