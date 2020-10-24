@@ -1,7 +1,7 @@
 require 'pg'
 require_relative 'data_access'
 require 'bcrypt'
-# heroku pg:push local_database_name DATABASE_URL
+# heroku pg:push whattoeat DATABASE_URL
 
 users = [{
   email: 'stevey@mail.com',

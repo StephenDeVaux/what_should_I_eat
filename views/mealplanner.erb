@@ -1,0 +1,14 @@
+<h2>Feed me! </h2>
+
+<form action="/mealplanner" method="post">
+    <label for="">How many meals do you need?</label>
+    <input type="number" name="num_meals">
+    <label for="">What type of meals do you want?</label>
+      <input list="categories" name="category">
+        <datalist id="categories">
+            <% get_categories.each do |category|%>
+                <option value="<%= category%>">   
+            <% end %>
+        </datalist> 
+    <button>Find my meals</button>
+</form>

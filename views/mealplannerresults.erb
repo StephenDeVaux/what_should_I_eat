@@ -1,0 +1,23 @@
+<h2>Results</h2>
+
+<p>Category <%= category %></p>
+<p>Number of meals <%= num_meals %></p>
+
+<% all_recipes = all_recipes(category) %>
+<% recipes = get_random_recipes(num_meals.to_i, all_recipes )%>
+<%= get_recipe_ids_from_list(recipes) %>
+
+<form action="/shoppinglist" method=post>
+    <input type="hidden" name="recipe_ids" value="<%= get_recipe_ids_from_list(recipes).join(",")  %>">
+    <button>Get shopping list</button>
+</form>
+
+<% recipes.each do |_recipe| %>
+    <article>
+        <h3><%= _recipe["name"]%></h3>
+        <h4>Recipe Category</h4>
+        <p>
+            suscipit officia ratione. Fugit molestias fugiat doloremque est ducimus modi cupiditate, laboriosam aut enim ea recusandae aliquam officiis consectetur at temporibus sequi ipsam, harum quia!
+        </p>
+    </article>
+<% end %>

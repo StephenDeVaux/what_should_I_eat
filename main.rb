@@ -35,6 +35,24 @@ def logged_in?
   end
 end
 
+require 'set'
+def get_random_recipes(n, recipes)
+  randoms = Set.new
+  rand_recipes = []
+  loop do
+    randoms << rand(recipes.count)
+    break if randoms.size >= n
+  end
+  randoms.each do |num|
+    rand_recipes.push(recipes[num])
+  end
+  return rand_recipes
+end
+
+def get_recipe_ids_from_list(recipes)
+  indexes = recipes.map {|recipe| recipe["id"] }
+end
+
 get '/' do
   recipes_pp = 5
   page_num = 1
@@ -95,6 +113,7 @@ post '/recipe' do
   ingredients = []
   1.upto 20 do |n|
     next unless (params["ingredient#{n}"]) != ''
+
     ingredients.push({
                        quantity: params["quantity#{n}"],
                        ingredient_id: find_ingredient_id_by_name(params["ingredient#{n}"])
@@ -115,17 +134,18 @@ post '/recipe' do
   }
 
   add_recipe(recipe)
-  redirect "/"
+  redirect '/'
 end
 
 post '/userrecipe/edit/' do
-  erb :editrecipe, locals: {recipe_id: params["recipe_id"]}
+  erb :editrecipe, locals: { recipe_id: params['recipe_id'] }
 end
 
 patch '/recipe' do
   ingredients = []
   1.upto 20 do |n|
     next unless (params["ingredient#{n}"]) != ''
+
     ingredients.push({
                        quantity: params["quantity#{n}"],
                        ingredient_id: find_ingredient_id_by_name(params["ingredient#{n}"])
@@ -145,6 +165,19 @@ patch '/recipe' do
     ingredients: ingredients
   }
 
-  update_recipe(recipe, params["recipe_id"])
-  redirect "/myrecipes"
+  update_recipe(recipe, params['recipe_id'])
+  redirect '/myrecipes'
+end
+
+get '/mealplanner' do
+  erb :mealplanner
+end
+
+post '/mealplanner' do
+  erb :mealplannerresults, locals: { num_meals: params['num_meals'], category: params['category'] }
+end
+
+post '/shoppinglist' do 
+  # raise params["recipe_ids"]
+  erb :shoppinglist, locals: { recipe_ids: params["recipe_ids"] }
 end
