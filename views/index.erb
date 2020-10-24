@@ -4,29 +4,25 @@
         <% get_categories.each do |category|%>
             <a class="category_btns" href="/?category=<%= category %>"><%= category %></a>
         <% end %>
-        <input type="text" value="search">
-        <button>Search</button>
     </div>
     <div>
         <div>
-            <p> <%= all_recipes(category).count%> Recipes Page: 
+            <p class="pager" > Page: 
                 <% 1.upto number_of_pages(all_recipes(category).count, 5)  do |n|  %>
-                    <a href="/?page_num=<%= n%>&category=<%= category %>"><%= n%></a>
+                    <a class="pages" href="/?page_num=<%= n%>&category=<%= category %>"><%= n%></a>
                 <% end %>
+                ( <%= all_recipes(category).count%> recipes )
             </p>
         </div>
         <section>
             <% all_recipes(category, recipes_pp, recipes_pp*(page_num.to_i - 1) ).each do |_recipe| %>
                 <article>
                     <h3><%= _recipe["name"]%></h3>
-                    <h4>Recipe Category</h4>
-                    <p>
-                        suscipit officia ratione. Fugit molestias fugiat doloremque est ducimus modi cupiditate, laboriosam aut enim ea recusandae aliquam officiis consectetur at temporibus sequi ipsam, harum quia!
-                    </p>
-                    <p>Keywords</p>
-                    <form action="/userrecipe?recipe_id=<%= _recipe["id"] %>" method="post">
+                    <h5><%= _recipe["category"]%></h5>
+                    <form class="recipe_btn" action="/userrecipe?recipe_id=<%= _recipe["id"] %>" method="post">
                         <button>+ My list</button>
                     </form>
+                    <img src="<%= _recipe["image_url"]%>" alt="">
                 </article>
             <% end %>
         </section>

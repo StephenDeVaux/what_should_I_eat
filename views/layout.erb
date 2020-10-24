@@ -5,26 +5,36 @@
   <title>Some one say food!</title>
   <link rel='stylesheet' href='/stylesheets/main.css'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Rancho&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <h1>What should I eat?</h1>
-    <a href="/">Home</a>
 
     <% if logged_in? %>
-      <a href="/myrecipes">My Recipes</a>
-      <a href="/addrecipe">Add Recipe</a>
-      <a href="/mealplanner">Feed me!</a>
-      <%= find_user_by_id(session[:user_id])["email"]  %>
-      <a href="/logout">Logout</a>
+      <div class="navbar">
+        <div></div>
+        <a id="homebtn" class="nav-btn" href="/">Home</a>
+        <a id="myrecbtn" class="nav-btn" href="/myrecipes">My Recipes</a>
+        <a id="addrecbtn" class="nav-btn" href="/addrecipe">Add Recipe</a>
+        <a id="feedmebtn" class="nav-btn" href="/mealplanner">Feed me!</a>
+      </div>
+      <div class="navbar2">
+        <%= find_user_by_id(session[:user_id])["email"]  %>
+        <a  href="/logout">Logout</a>
+      </div>
     <% else %>
-      <a href="/login">Login</a>
+      <div></div>
+      <div class="navbar2">
+        <div></div>
+        <a class="nav-btn" href="/login">Login</a>
+      </div>
     <% end %>
   </header>
 
 
 
   <%= yield %>
-
+  <script src="/javascripts/application.js"></script>
 </body>
 </html>
