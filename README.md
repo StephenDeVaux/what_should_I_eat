@@ -26,7 +26,7 @@ Next the database schema was outlined. As one fo the important features was to b
 ### 3. Challenges
 - Determining the shopping list requires multiple database queries and summation of results. Higher level database queries could improve the process
 - There are still a number of outstanding bugs within the code
-- With the serperation of Ruby and Javascript, difficult to use javascript for some styling
+- With the serperation of Ruby and Javascript, difficult to use javascript for some styling. Navbar buttons styling quite dodgy.
 
 ### 5. Lessons
 - Scope was a bit big for the time allowed
