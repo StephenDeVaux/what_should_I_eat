@@ -17,3 +17,4 @@ Link - https://whatshouldieat2.herokuapp.com
 
 ![alt text](https://raw.githubusercontent.com/StephenDeVaux/what_should_I_eat/main/public/images/databaseSchema.png)
 
+![alt text](https://raw.githubusercontent.com/StephenDeVaux/what_should_I_eat/main/public/images/wireframes.png)
