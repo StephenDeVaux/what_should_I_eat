@@ -13,8 +13,12 @@ The topci choosen is a recipe site that solves the following problems
 
 Link - https://whatshouldieat2.herokuapp.com
 
+![alt text](https://raw.githubusercontent.com/StephenDeVaux/what_should_I_eat/main/public/images/website.png)
+
 ### 2. Development
 
 ![alt text](https://raw.githubusercontent.com/StephenDeVaux/what_should_I_eat/main/public/images/databaseSchema.png)
 
 ![alt text](https://raw.githubusercontent.com/StephenDeVaux/what_should_I_eat/main/public/images/wireframes.png)
+
+
