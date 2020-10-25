@@ -50,11 +50,11 @@ def get_random_recipes(n, recipes)
   randoms.each do |num|
     rand_recipes.push(recipes[num])
   end
-  return rand_recipes
+  rand_recipes
 end
 
 def get_recipe_ids_from_list(recipes)
-  indexes = recipes.map {|recipe| recipe["id"] }
+  indexes = recipes.map { |recipe| recipe['id'] }
 end
 
 get '/' do
@@ -69,8 +69,8 @@ end
 
 get '/login' do
   message = ''
-  message = params["message"] unless params["message"].nil?
-  erb :login, locals: { message: message}
+  message = params['message'] unless params['message'].nil?
+  erb :login, locals: { message: message }
 end
 
 post '/login' do
@@ -82,6 +82,22 @@ post '/login' do
     redirect '/'
   else
     redirect '/login?message=Password incorrect'
+  end
+end
+
+get '/signup' do
+  message = ''
+  message = params['message'] unless params['message'].nil?
+  erb :signup, locals: { message: message }
+end
+
+post '/user' do
+  user = find_user_by_email(params['email'])
+  if user
+    redirect '/signup?message=User already exists'
+  else
+    add_user(email: params['email'], password_hash: BCrypt::Password.create(params['password']))
+    redirect '/login?message=User created, please login'
   end
 end
 
@@ -115,7 +131,7 @@ get '/addrecipe' do
 end
 
 get '/recipe' do
-  erb :recipe, locals: {recipe_id: params["recipe_id"]}
+  erb :recipe, locals: { recipe_id: params['recipe_id'] }
 end
 
 post '/recipe' do
@@ -186,7 +202,7 @@ post '/mealplanner' do
   erb :mealplannerresults, locals: { num_meals: params['num_meals'], category: params['category'] }
 end
 
-post '/shoppinglist' do 
+post '/shoppinglist' do
   # raise params["recipe_ids"]
-  erb :shoppinglist, locals: { recipe_ids: params["recipe_ids"] }
+  erb :shoppinglist, locals: { recipe_ids: params['recipe_ids'] }
 end
