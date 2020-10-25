@@ -15,5 +15,5 @@ Link - https://whatshouldieat2.herokuapp.com
 
 ### 2. Development
 
-![alt text](https://github.com/StephenDeVaux/what_should_i_eat/blob/master/public/images/databaseSchema.png?raw=true "Database Schema")
+![alt text](https://raw.githubusercontent.com/StephenDeVaux/what_should_I_eat/main/public/images/databaseSchema.png)
 
