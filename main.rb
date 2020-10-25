@@ -107,6 +107,7 @@ get '/logout' do
 end
 
 get '/myrecipes' do
+  redirect '/login' unless logged_in?
   recipes_pp = get_recipes_pp
   page_num = 1
   category = get_categories.first
@@ -117,16 +118,19 @@ get '/myrecipes' do
 end
 
 post '/userrecipe' do
+  redirect '/login' unless logged_in?
   add_recipe_to_user_list(session[:user_id], params['recipe_id'])
   redirect '/myrecipes'
 end
 
 delete '/userrecipe' do
+  redirect '/login' unless logged_in?
   delete_recipe_from_user_list(session[:user_id], params['recipe_id'])
   redirect '/myrecipes'
 end
 
 get '/addrecipe' do
+  redirect '/login' unless logged_in?
   erb :addrecipe
 end
 
@@ -135,6 +139,7 @@ get '/recipe' do
 end
 
 post '/recipe' do
+  redirect '/login' unless logged_in?
   ingredients = []
   1.upto 20 do |n|
     next unless (params["ingredient#{n}"]) != ''
@@ -163,10 +168,12 @@ post '/recipe' do
 end
 
 post '/userrecipe/edit/' do
+  redirect '/login' unless logged_in?
   erb :editrecipe, locals: { recipe_id: params['recipe_id'] }
 end
 
 patch '/recipe' do
+  redirect '/login' unless logged_in?
   ingredients = []
   1.upto 20 do |n|
     next unless (params["ingredient#{n}"]) != ''
@@ -195,14 +202,17 @@ patch '/recipe' do
 end
 
 get '/mealplanner' do
+  redirect '/login' unless logged_in?
   erb :mealplanner
 end
 
 post '/mealplanner' do
+  redirect '/login' unless logged_in?
   erb :mealplannerresults, locals: { num_meals: params['num_meals'], category: params['category'] }
 end
 
 post '/shoppinglist' do
+  redirect '/login' unless logged_in?
   # raise params["recipe_ids"]
   erb :shoppinglist, locals: { recipe_ids: params['recipe_ids'] }
 end
