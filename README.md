@@ -1,4 +1,4 @@
-# what_should_I_eat
+# What Should I Eat?
 
 Web app built for project as part of General Assembly course. The aim of the project was to build a web app on the following technology stack:
 - Posgres SQL database
@@ -37,4 +37,5 @@ Things to add still:
  - Sorting of recipes
  - Can add same recipe twice to your list? Maybe not useful
  - If User edits recipes, edits for all users, not very useful
+ - The meal planner doesnt save your recipes anywhere, so once its gone its gone... 
 

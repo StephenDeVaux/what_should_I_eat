@@ -2,7 +2,7 @@
     <div>
         <h4>Categories</h4>
         <% get_categories.each do |category|%>
-            <a class="category_btns" href="/myrecipes?category=<%= category %>"><%= category %></a>
+            <a id="<%= category %>" class="category_btns" href="/myrecipes?category=<%= category %>"><%= category %></a>
         <% end %>
     </div>
     <div>

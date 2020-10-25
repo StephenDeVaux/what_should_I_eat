@@ -17,11 +17,9 @@ if (url.includes("myrecipes")) {
 categories = ["All", "Mains", "Side", "Dessert", "Starter", "Breakfast", "Snack", "Lunch", "Baking"]
 categorybuttons = {};
 categories.forEach(function(category) {
-    categorybuttons["category"] = document.querySelector("#" + category)
+    categorybuttons[category] = document.querySelector("#" + category)
+    if (url.includes("category=" + category)) {
+        console.log("URL included " + category)
+        categorybuttons[category].classList.add("selectedbtn")
+    }
 })
-
-// if (url.includes("myrecipes")) {
-//     let homebtn = document.querySelector("#homebtn")
-// }  else {
-//     homebtn.classList.add("selectedbtn")
-// }
