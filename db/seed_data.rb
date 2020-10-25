@@ -30,7 +30,39 @@ ingredients = [{
                },
                {
                  name: 'eggs',
+                 units: 'each'
+               },
+               {
+                 name: 'water',
+                 units: 'ml'
+               },
+               {
+                 name: 'butter',
                  units: 'grams'
+               },
+               {
+                 name: 'bananas',
+                 units: 'each'
+               },
+               {
+                 name: 'lettuce',
+                 units: 'pieces'
+               },
+               {
+                 name: 'eggs',
+                 units: 'each'
+               },
+               {
+                 name: 'eggs',
+                 units: 'each'
+               },
+               {
+                 name: 'eggs',
+                 units: 'each'
+               },
+               {
+                 name: 'eggs',
+                 units: 'each'
                },
                {
                  name: 'Bread',

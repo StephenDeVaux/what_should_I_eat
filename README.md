@@ -23,6 +23,8 @@ The first thing planned for was the overall functionality and interface of the s
 Next the database schema was outlined. As one fo the important features was to be able to create a shopping list, this resulted in the need to have a single global list of ingredients that defines each ingredient and its specific units(eg, grams, liters etc). Otherwise when creating the shopping list you would end up with duplicates or would be difficult to add equivalent ingredients from different recipes. 
 ![alt text](https://raw.githubusercontent.com/StephenDeVaux/what_should_I_eat/main/public/images/databaseSchema.png)
 
+A project plan with all the forseen tasks was created using the kanbaan project planner feature in Github. 
+
 ### 3. Challenges
 - Determining the shopping list requires multiple database queries and summation of results. Higher level database queries could improve the process
 - There are still a number of outstanding bugs within the code
@@ -38,4 +40,6 @@ Things to add still:
  - Can add same recipe twice to your list? Maybe not useful
  - If User edits recipes, edits for all users, not very useful
  - The meal planner doesnt save your recipes anywhere, so once its gone its gone... 
+ - addition of meal search
+
 
